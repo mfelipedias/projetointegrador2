@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <!-- fontawesome Icons -->
     <script src="https://kit.fontawesome.com/17040bbfa3.js" crossorigin="anonymous"></script>
-
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
@@ -34,7 +35,24 @@
 </head>
 
 <body class="bg-light" style="max-width: 1366px; margin-right:auto; margin-left:auto">
+    <?php
+    session_start();
+    if ((!isset($_SESSION['user']) == true) and (!isset($_SESSION['t_senha']) == true)) {
+        unset($_SESSION['id_tutores']);
+        unset($_SESSION['t_nome']);
+        unset($_SESSION['t_senha']);
+        unset($_SESSION['t_funcao']);
+        unset($_SESSION['t_status']);
+        unset($_SESSION['t_usuario']);
+        unset($_SESSION['senha']);
+        header('location: ./login.php');
+    }
+    $logado = $_SESSION['t_nome'];
+    $id_tutores = $_SESSION['id_tutores'];
+    $funcao = $_SESSION['t_funcao'];
+    ?>
     <div class="row">
+
         <header class="bg-white navbar shadow rounded d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-1 mb-2 border-bottom" style=" margin-right:auto; margin-left:auto">
             <a href="#" class="d-flex align-items-center col-md-3 mb-md-0 text-dark text-decoration-none">
                 <img src="./img/coruja.png" width="40" role="img" class="img-fluid">
@@ -53,8 +71,8 @@
             <div class="col-md-3 text-end">
                 <div class="dropdown text-end">
                     <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <label style="margin-right:15px;">Bem vindo, <b style="color:#E74C3C;">Felipe!</b></label>
-                        <img src="https://github.com/mdo.png" alt="mdo" width="35" height="35" class="rounded-circle">
+                        <label style="margin-right:15px;">Bem vindo, <b style="color:#E74C3C;"><?php echo $logado ?>!</b></label>
+                        <img src="./img/user.jpg" alt="mdo" width="35" height="35" class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end text-small" aria-labelledby="dropdownUser1">
                         <li><a class="dropdown-item" href="#">Meu perfil</a></li>
@@ -62,7 +80,7 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#">Sair</a></li>
+                        <li><a class="dropdown-item" href="./scripts/logout_.php">Sair</a></li>
                     </ul>
                 </div>
             </div>
@@ -90,6 +108,17 @@
                     break;
                 case 'tutores':
                     include './includes/tutores.php';
+                    break;
+                case 'tutores_add':
+                    include './includes/sub/tutores_add.php';
+                    break;
+                case 'tutores_add_ok':
+                    include './includes/return/sucesso.php';
+                    include './includes/sub/tutores_add.php';
+                    break;
+                case 'tutores_add_erro':
+                    include './includes/return/erro.php';
+                    include './includes/sub/tutores_add.php';
                     break;
                 case 'sobre':
                     include './includes/sobre.php';
@@ -137,6 +166,8 @@
             return new bootstrap.Popover(popoverTriggerEl)
         })
     </script>
+    <script src="js/scripts.js"></script>
+
 </body>
 
 </html>

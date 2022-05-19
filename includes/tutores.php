@@ -1,3 +1,7 @@
+<?php
+error_reporting(0);
+$filtro = $_GET['filtro'];
+?>
 <div class="row mb-3">
     <div class="card shadow-sm" style="background-image: url(./img/pen.png);background-size: 130px; background-repeat: no-repeat; background-position: 0% 50%; ">
         <div class="card-body" style="padding-bottom: 0; background-image: url(./img/logo_escola.png);background-size: 120px; background-repeat: no-repeat; background-position: 99% 50% ">
@@ -17,7 +21,7 @@
 
                     </div>
                     <div class="col-md-auto">
-                        <a class="bi hover bi-person-plus mx-2" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="bottom" data-bs-content="Cadastrar Aluno" href="#" style="font-size: 27px;"></a>
+                        <a class="bi hover bi-person-plus mx-2" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="bottom" data-bs-content="Cadastrar Aluno" href="?pagina=tutores_add" style="font-size: 27px;"></a>
                     </div>
                 </div>
                 </p>
@@ -43,37 +47,112 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>José da Silva</td>
-                    <td>jose</td>
-                    <td>jose@gmail.com</td>
-                    <td>Pedagogo</td>
-                    <td>
-                        <div class="btn-group" role="group" aria-label="..."><a class="btn btn-outline-primary" href="#"><i class="bi bi-pen"></i></a><a class="btn btn-outline-danger" href="#"><i class="bi bi-trash"></i></a></div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Maria da Silva</td>
-                    <td>maria</td>
-                    <td>maria@gmail.com</td>
-                    <td>Diretora</td>
-                    <td>
-                        <div class="btn-group" role="group" aria-label="..."><a class="btn btn-outline-primary" href="#"><i class="bi bi-pen"></i></a><a class="btn btn-outline-danger" href="#"><i class="bi bi-trash"></i></a></div>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Renata Figueiredo</td>
-                    <td>renata</td>
-                    <td>renata@hotmail.com</td>
-                    <td>Professora</td>
-                    <td>
-                        <div class="btn-group" role="group" aria-label="..."><a class="btn btn-outline-primary" href="#"><i class="bi bi-pen"></i></a><a class="btn btn-outline-danger" href="#"><i class="bi bi-trash"></i></a></div>
-                    </td>
-                </tr>
+                <?php
+                include './scripts/conexao.php';
+                if ($filtro == "") {
+                    $sql = "SELECT * FROM `tutores` ORDER BY t_nome ASC";
+                } else {
+                    $sql = $filtro;
+                }
+                $total_reg = "15"; // número de registros por página
+                $pag = $_GET['pag'];
+                if (!$pag) {
+                    $pc = "1";
+                } else {
+                    $pc = $pag;
+                }
+                $inicio = $pc - 1;
+                $inicio = $inicio * $total_reg;
+
+                $limite = mysqli_query($conexao, "$sql LIMIT $inicio, $total_reg");
+                $todos = mysqli_query($conexao, $sql);
+
+                $tr = mysqli_num_rows($todos); // verifica o número total de registros
+                $tp = $tr / $total_reg; // verifica o número total de páginas
+
+                $busca = mysqli_query($conexao, $sql);
+                $contador = 0;
+                while ($array = mysqli_fetch_array($limite)) {
+
+                    $contador = $contador + 1;
+                    $id_tutor = $array['id_tutor'];
+                    $t_nome = $array['t_nome'];
+                    $t_usuario = $array['t_user'];
+                    $t_email = $array['t_email'];
+                    $t_status = $array['t_status'];
+                    $t_funcao = $array['t_funcao'];
+                ?>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td><?php echo $t_nome?></td>
+                        <td><?php echo $t_usuario?></td>
+                        <td><?php echo $t_email?></td>
+                        <td><?php echo $t_funcao?></td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="..."><a class="btn btn-outline-primary" href="#"><i class="bi bi-pen"></i></a><a class="btn btn-outline-danger" href="#"><i class="bi bi-trash"></i></a></div>
+                        </td>
+                    <?php } ?>
+                    </tr>
             </tbody>
+            <center><?php
+                        $anterior = $pc - 1;
+                        $proximo = $pc + 1;
+                        if ($pc > 1) {
+                            echo "
+                      </style>
+                      <a style='appearance: none;
+                      text-decoration: none;
+                      background-color: #FAFBFC;
+                      border: 1px solid rgba(27, 31, 35, 0.15);
+                      border-radius: 6px;
+                      box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+                      box-sizing: border-box;
+                      color: #24292E;
+                      cursor: pointer;
+                      display: inline-block;
+                      font-family: -apple-system, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+                      font-size: 14px;
+                      font-weight: 500;
+                      line-height: 20px;
+                      list-style: none;
+                      padding: 6px 16px;
+                      position: relative;
+                      transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+                      user-select: none;
+                      -webkit-user-select: none;
+                      touch-action: manipulation;
+                      vertical-align: middle;
+                      white-space: nowrap;
+                      word-wrap: break-word;' href='?pagina=usuarios&&pag=$anterior'>Anterior</a>";
+                        }
+                        echo "&nbsp | &nbsp";
+                        if ($pc < $tp) {
+                            echo "<a style='appearance: none;
+                      text-decoration: none;
+                      background-color: #FAFBFC;
+                      border: 1px solid rgba(27, 31, 35, 0.15);
+                      border-radius: 6px;
+                      box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+                      box-sizing: border-box;
+                      color: #24292E;
+                      cursor: pointer;
+                      display: inline-block;
+                      font-family: -apple-system, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+                      font-size: 14px;
+                      font-weight: 500;
+                      line-height: 20px;
+                      list-style: none;
+                      padding: 6px 16px;
+                      position: relative;
+                      transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+                      user-select: none;
+                      -webkit-user-select: none;
+                      touch-action: manipulation;
+                      vertical-align: middle;
+                      white-space: nowrap;
+                      word-wrap: break-word;' href='?pagina=usuarios&&pag=$proximo'>Próxima</a>";
+                        }
+                        ?></center>
         </table>
     </div>
 
