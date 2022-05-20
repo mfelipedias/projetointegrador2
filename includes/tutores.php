@@ -83,22 +83,40 @@ $filtro = $_GET['filtro'];
                     $t_funcao = $array['t_funcao'];
                 ?>
                     <tr>
-                        <th scope="row">1</th>
-                        <td><?php echo $t_nome?></td>
-                        <td><?php echo $t_usuario?></td>
-                        <td><?php echo $t_email?></td>
-                        <td><?php echo $t_funcao?></td>
+                        <th scope="row"><?php echo $id_tutor ?></th>
+                        <td><?php echo $t_nome ?></td>
+                        <td><?php echo $t_usuario ?></td>
+                        <td><?php echo $t_email ?></td>
+                        <td><?php echo $t_funcao ?></td>
                         <td>
-                            <div class="btn-group" role="group" aria-label="..."><a class="btn btn-outline-primary" href="#"><i class="bi bi-pen"></i></a><a class="btn btn-outline-danger" href="#"><i class="bi bi-trash"></i></a></div>
+                            <div class="btn-group" role="group" aria-label="..."><a class="btn btn-outline-primary" href="?pagina=tutores_edit&&id=<?php echo $id_tutor?>"><i class="bi bi-pen"></i></a>
+                            <button class="btn btn-outline-danger" href="" data-bs-toggle="modal" data-bs-target="#modalExcluir<?php echo $id_tutor ?>"><i class="bi bi-trash"></i></button></div>
                         </td>
+                        <div class="modal fade" id="modalExcluir<?php echo $id_tutor ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document" style="width: 380px; transition: bottom .75s ease-in-out">
+                                <div class="modal-content rounded-6 shadow" style="border-radius: .75rem;">
+                                    <div class="modal-header border-bottom-0">
+                                        <h5 class="modal-title">Exclusão</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body py-0">
+                                        <p>Este cadastro está prestes a ser excluido. Essa ação não pode ser desfeita, deseja continuar?</p>
+                                    </div>
+                                    <div class="modal-footer flex-column border-top-0">
+                                        <a type="button" class="btn btn-lg btn-danger w-100 mx-0 mb-2" href="./scripts/tutor_del.php?id=<?php echo $id_tutor ?>">Sim</a>
+                                        <button type="button" class="btn btn-lg btn-light w-100 mx-0" data-bs-dismiss="modal">Não</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     <?php } ?>
                     </tr>
             </tbody>
             <center><?php
-                        $anterior = $pc - 1;
-                        $proximo = $pc + 1;
-                        if ($pc > 1) {
-                            echo "
+                    $anterior = $pc - 1;
+                    $proximo = $pc + 1;
+                    if ($pc > 1) {
+                        echo "
                       </style>
                       <a style='appearance: none;
                       text-decoration: none;
@@ -124,10 +142,10 @@ $filtro = $_GET['filtro'];
                       vertical-align: middle;
                       white-space: nowrap;
                       word-wrap: break-word;' href='?pagina=usuarios&&pag=$anterior'>Anterior</a>";
-                        }
-                        echo "&nbsp | &nbsp";
-                        if ($pc < $tp) {
-                            echo "<a style='appearance: none;
+                    }
+                    echo "&nbsp | &nbsp";
+                    if ($pc < $tp) {
+                        echo "<a style='appearance: none;
                       text-decoration: none;
                       background-color: #FAFBFC;
                       border: 1px solid rgba(27, 31, 35, 0.15);
@@ -151,8 +169,8 @@ $filtro = $_GET['filtro'];
                       vertical-align: middle;
                       white-space: nowrap;
                       word-wrap: break-word;' href='?pagina=usuarios&&pag=$proximo'>Próxima</a>";
-                        }
-                        ?></center>
+                    }
+                    ?></center>
         </table>
     </div>
 

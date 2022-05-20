@@ -10,7 +10,7 @@
     <!-- fontawesome Icons -->
     <script src="https://kit.fontawesome.com/17040bbfa3.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
@@ -114,11 +114,22 @@
                     break;
                 case 'tutores_add_ok':
                     include './includes/return/sucesso.php';
-                    include './includes/sub/tutores_add.php';
+                    include './includes/tutores.php';
                     break;
                 case 'tutores_add_erro':
                     include './includes/return/erro.php';
                     include './includes/sub/tutores_add.php';
+                    break;
+                case 'tutores_edit':
+                    include './includes/sub/tutores_edit.php';
+                    break;
+                case 'tutores_edit_ok':
+                    include './includes/return/sucesso.php';
+                    include './includes/sub/tutores_edit.php';
+                    break;
+                case 'tutores_del_ok':
+                    include './includes/return/aviso.php';
+                    include './includes/tutores.php';
                     break;
                 case 'sobre':
                     include './includes/sobre.php';

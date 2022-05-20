@@ -14,59 +14,79 @@
 </div>
 <div class="row">
 
-    <div class="card p-3">
-        <form action="./scripts/tutor_add.php" method="post">
-            <div class="row">
-                <div class="col-xl-2">
-                    <label class="form-label">Status: </label>
-                    <select class="form-select" aria-label="Status" id="t_status" name="t_status">
-                        <option value="1">Ativo</option>
-                        <option value="0">Inativo</option>
-                    </select>
+    <div class="card p-3" style=" background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url(./img/coruja.png);background-repeat: no-repeat;">
 
-                </div>
-                <div class="col-xl-5">
-                    <label class="form-label">Nome:</label>
-                    <input class="form-control" type="text" id="t_nome" name="t_nome" required>
-                </div>
-                <div class="col-xl-5">
-                    <label class="form-label">Função:</label>
-                    <input class="form-control" type="text" id="t_funcao" name="t_funcao" required>
-                </div>
+        <div class="row">
+            <div class="col">
+
+                <form class="container" action="./scripts/tutor_add.php" method="post" style="max-width: 800px;">
+                    <div class="row">
+                        <div class="col-xl-2">
+                            <label class="form-label">Status: </label>
+                            <select class="form-select" aria-label="Status" id="t_status" name="t_status">
+                                <option value="1">Ativo</option>
+                                <option value="0">Inativo</option>
+                            </select>
+
+                        </div>
+                        <div class="col-xl-5">
+                            <label class="form-label">Nome:</label>
+                            <input class="form-control" type="text" id="t_nome" name="t_nome" required>
+                        </div>
+                        <div class="col-xl-5">
+                            <label class="form-label">Função:</label>
+                            <select class="form-select" id="t_funcao" name="t_funcao" required>
+                                <option value="">Selecione...</option>
+                                <option value="Administrador(a)">Administrador(a)</option>
+                                <option value="Conferente(a)">Conferente</option>
+                                <option value="Diretor(a)">Diretor(a)</option>
+                                <option value="Pedagogo(a)">Pedagogo(a)</option>
+                                <option value="Professor(a)">Professor(a)</option>
+                                <option value="Psicólogo(a)">Psicológo(a)</option>
+                                <option value="Tutor(a)">Tutor(a)</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label">Email: </label>
+                            <input class="form-control" type="text" id="t_email" name="t_email" required maxlength="100">
+                        </div>
+                        <div class="col">
+                            <label class="form-label">Telefone: </label>
+                            <input class="form-control" type="text" id="t_tel" name="t_tel" required maxlength="20">
+                        </div>
+
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <label class="form-label">Usuário: </label>
+                            <input class="form-control" type="text" id="t_user" name="t_user" required maxlength="50">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label">Senha: </label>
+                            <input class="form-control" type="password" id="t_senha" name="t_senha" placeholder="Digite uma senha..." required maxlength="50">
+                        </div>
+                        <div class="col">
+                            <label class="form-label">Repita a senha: </label>
+                            <input class="form-control" type="password" id="t_rsenha" name="t_rsenha" placeholder="Repita a senha..." oninput='validaSenha(this)' required maxlength="50">
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col">
+                            <a type="button" class="btn btn-secondary" href="?pagina=tutores">Voltar</a>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
+
+                    </div>
+
+                </form>
             </div>
-            <hr>
-            <div class="row">
-                <div class="col">
-                    <label class="form-label">Email: </label>
-                    <input class="form-control" type="text" id="t_email" name="t_email"required>
-                </div>
-                <div class="col">
-                    <label class="form-label">Usuário: </label>
-                    <input class="form-control" type="text" id="t_user" name="t_user" required>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <label class="form-label">Senha: </label>
-                    <input class="form-control" type="password" id="t_senha" name="t_senha" placeholder="Digite uma senha..." required>
-                </div>
-                <div class="col">
-                    <label class="form-label">Repita a senha: </label>
-                    <input class="form-control" type="password" id="t_rsenha" name="t_rsenha" placeholder="Repita a senha..." oninput='validaSenha(this)' required>
-                </div>
-
-
-            </div>
-
-
-            <div class="row mt-4">
-                <div class="col">
-                    <a type="button" class="btn btn-secondary" href="?pagina=tutores">Voltar</a>
-                    <button type="submit" class="btn btn-primary">Salvar</button>
-                </div>
-
-            </div>
-
-        </form>
+        </div>
     </div>
 </div>

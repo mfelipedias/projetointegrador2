@@ -24,7 +24,7 @@ if ($total == 0) {
         $senhacod = sha1($senha);
 
         if ($total > 0) {
-            if ($senha == $t_senha) {
+            if ($senhacod == $t_senha) {
                 if ($t_status == 1) {
                     $_SESSION['id_tutores'] = $id_usuario;
                     $_SESSION['t_nome'] = $t_nome;
