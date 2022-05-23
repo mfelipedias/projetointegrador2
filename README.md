@@ -14,7 +14,7 @@ Linguagens Utilizadas:
 
 Banco de dados e Servidor:
 
-![](https://img.shields.io/badge/Databse-MySQL-green)
+![](https://img.shields.io/badge/Database-MySQL-green)
 ![](https://img.shields.io/badge/Servidor-Apache-crimson)
 
 Pacote:
