@@ -103,6 +103,26 @@
                 case 'alunos_edit':
                     include './includes/sub/alunos_edit.php';
                     break;
+                case 'alunos_add':
+                    include './includes/sub/alunos_add.php';
+                    break;
+                    break;
+                case 'alunos_add_ok':
+                    include './includes/return/sucesso.php';
+                    include './includes/alunos.php';
+                    break;
+                case 'alunos_add_erro':
+                    include './includes/return/erro.php';
+                    include './includes/sub/alunos_add.php';
+                    break;
+                case 'alunos_edit_ok':
+                    include './includes/return/sucesso.php';
+                    include './includes/sub/alunos_view.php';
+                    break;
+                case 'alunos_del_ok':
+                    include './includes/return/aviso.php';
+                    include './includes/alunos.php';
+                    break;
                 case 'atividades':
                     include './includes/atividades.php';
                     break;

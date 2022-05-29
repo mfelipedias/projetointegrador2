@@ -76,6 +76,7 @@ $filtro = $_GET['filtro'];
 
                     $contador = $contador + 1;
                     $id_tutor = $array['id_tutor'];
+                    $t_status = $array['t_status'];
                     $t_nome = $array['t_nome'];
                     $t_usuario = $array['t_user'];
                     $t_email = $array['t_email'];
@@ -84,13 +85,19 @@ $filtro = $_GET['filtro'];
                 ?>
                     <tr>
                         <th scope="row"><?php echo $id_tutor ?></th>
+                        <td><i class="bi bi-circle-fill" style="color:<?php if ($t_status == 1) {
+                                                                            echo 'green';
+                                                                        } else {
+                                                                            echo 'red';
+                                                                        } ?>;"></i></td>
                         <td><?php echo $t_nome ?></td>
                         <td><?php echo $t_usuario ?></td>
                         <td><?php echo $t_email ?></td>
                         <td><?php echo $t_funcao ?></td>
                         <td>
-                            <div class="btn-group" role="group" aria-label="..."><a class="btn btn-outline-primary" href="?pagina=tutores_edit&&id=<?php echo $id_tutor?>"><i class="bi bi-pen"></i></a>
-                            <button class="btn btn-outline-danger" href="" data-bs-toggle="modal" data-bs-target="#modalExcluir<?php echo $id_tutor ?>"><i class="bi bi-trash"></i></button></div>
+                            <div class="btn-group" role="group" aria-label="..."><a class="btn btn-outline-primary" href="?pagina=tutores_edit&&id=<?php echo $id_tutor ?>"><i class="bi bi-pen"></i></a>
+                                <button class="btn btn-outline-danger" href="" data-bs-toggle="modal" data-bs-target="#modalExcluir<?php echo $id_tutor ?>"><i class="bi bi-trash"></i></button>
+                            </div>
                         </td>
                         <div class="modal fade" id="modalExcluir<?php echo $id_tutor ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document" style="width: 380px; transition: bottom .75s ease-in-out">
@@ -112,11 +119,13 @@ $filtro = $_GET['filtro'];
                     <?php } ?>
                     </tr>
             </tbody>
-            <center><?php
-                    $anterior = $pc - 1;
-                    $proximo = $pc + 1;
-                    if ($pc > 1) {
-                        echo "
+
+        </table>
+        <center><?php
+                $anterior = $pc - 1;
+                $proximo = $pc + 1;
+                if ($pc > 1) {
+                    echo "
                       </style>
                       <a style='appearance: none;
                       text-decoration: none;
@@ -141,11 +150,11 @@ $filtro = $_GET['filtro'];
                       touch-action: manipulation;
                       vertical-align: middle;
                       white-space: nowrap;
-                      word-wrap: break-word;' href='?pagina=usuarios&&pag=$anterior'>Anterior</a>";
-                    }
-                    echo "&nbsp | &nbsp";
-                    if ($pc < $tp) {
-                        echo "<a style='appearance: none;
+                      word-wrap: break-word;' href='?pagina=tutores&&pag=$anterior'>Anterior</a>";
+                }
+                echo "&nbsp | &nbsp";
+                if ($pc < $tp) {
+                    echo "<a style='appearance: none;
                       text-decoration: none;
                       background-color: #FAFBFC;
                       border: 1px solid rgba(27, 31, 35, 0.15);
@@ -168,10 +177,9 @@ $filtro = $_GET['filtro'];
                       touch-action: manipulation;
                       vertical-align: middle;
                       white-space: nowrap;
-                      word-wrap: break-word;' href='?pagina=usuarios&&pag=$proximo'>Próxima</a>";
-                    }
-                    ?></center>
-        </table>
+                      word-wrap: break-word;' href='?pagina=tutores&&pag=$proximo'>Próxima</a>";
+                }
+                ?></center>
     </div>
 
 </div>

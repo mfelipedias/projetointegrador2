@@ -38,6 +38,10 @@ while ($array = mysqli_fetch_array($busca)) {
 
                 <form class="container" action="./scripts/tutor_edit.php" method="post" style="max-width: 800px;">
                     <div class="row">
+                    <div class="col-xl-2">
+                            <label class="form-label">ID:</label>
+                            <input class="form-control" type="text" id="id_tutor" name="id_tutor" value="<?php echo $id_tutor ?>" readonly>
+                        </div>
                         <div class="col-xl-2">
                             <label class="form-label">Status: </label>
                             <select class="form-select" aria-label="Status" id="t_status" name="t_status">
@@ -49,11 +53,11 @@ while ($array = mysqli_fetch_array($busca)) {
                             </select>
 
                         </div>
-                        <div class="col-xl-5">
+                        <div class="col-xl-4">
                             <label class="form-label">Cadastro:</label>
                             <input class="form-control" type="text" id="t_create" name="t_create" value="<?php echo $t_create ?>" readonly>
                         </div>
-                        <div class="col-xl-5">
+                        <div class="col-xl-4">
                             <label class="form-label">Atualização:</label>
                             <input class="form-control" type="text" id="t_update" name="t_update" value="<?php echo $t_update ?>" readonly>
                         </div>
