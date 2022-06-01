@@ -4,30 +4,62 @@
     border: solid rgba(0, 0, 0, .15);
     border-width: 1px 0;
     box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-  }
-  
-  .form-control-dark {
+}
+
+.form-control-dark {
     color: #fff;
     background-color: var(--bs-dark);
     border-color: var(--bs-gray);
-  }
-  .form-control-dark:focus {
-    color: #fff;
-    background-color: var(--bs-dark);
-    border-color: #fff;
-    box-shadow: 0 0 0 .25rem rgba(255, 255, 255, .25);
-  }
-  
-  .bi {
+}
+
+    .form-control-dark:focus {
+        color: #fff;
+        background-color: var(--bs-dark);
+        border-color: #fff;
+        box-shadow: 0 0 0 .25rem rgba(255, 255, 255, .25);
+    }
+
+.bi {
     vertical-align: -.125em;
     fill: currentColor;
-  }
-  
-  .text-small {
+}
+
+.text-small {
     font-size: 85%;
-  }
-  
-  .dropdown-toggle {
+}
+
+.dropdown-toggle {
     outline: 0;
-  }
-  
+}
+
+.buttonColor {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    border-radius: 25px;
+    box-shadow: 0 0 2.5px 0 #39a2db59;
+    cursor: pointer;
+    background-color: #ffffff;
+}
+
+.ball {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #053742;
+    transition: left 1s;
+}
+
+.ball-move {
+    left: calc(100% - 20px);
+}
+
+.Contraste {
+    background-color: black;
+    color: snow
+}
+
+

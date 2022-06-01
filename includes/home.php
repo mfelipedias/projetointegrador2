@@ -1,11 +1,10 @@
-<div class="row mb-3">
+<div class="row mb-3 bg-dark">
     <div class="card shadow-sm" style="background-image: url(./img/pen.png);background-size: 130px; background-repeat: no-repeat; background-position: 0% 50%; ">
         <div class="card-body" style="padding-bottom: 0; background-image: url(./img/logo_escola.png);background-size: 120px; background-repeat: no-repeat; background-position: 99% 50% ">
             <center>
                 <p class="lead text-muted" style="font-size:25px;font-family: 'My Big Heart Demo', sans-serif; ">E.E. Profª. Hermelina de Albuquerque Passarela</p>
                 <p>
                     <a class="bi hover bi-vector-pen mx-2" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="bottom" data-bs-content="Criar Aviso" href="#" style="font-size: 30px;"></a>
-                    <a class="bi  hover bi-circle-half mx-2" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="bottom" data-bs-content="Alto Contraste" href="#" style="font-size: 30px;"></a>
                     <a class="bi hover bi-facebook mx-2" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="bottom" data-bs-content="Facebook" href="#" style="font-size: 30px;"></a>
                     <a class="bi hover bi-instagram mx-2" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="bottom" data-bs-content="Instagram" href="#" style="font-size: 30px;"></a>
                     <a class="bi hover bi-envelope-paper mx-2" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="bottom" data-bs-content="Email" href="#" style="font-size: 30px;"></a>
@@ -82,7 +81,7 @@
         <h5><i class="bi bi-info-square" style="margin-right: 10px;"></i>Informaçoes gerais</h5>
         <hr>
         <div class="card shadow-sm" style="height: 381px; background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url(./img/coruja.png);background-repeat: no-repeat;">
-            <div class="card-body">
+            <div class="card-body" style="color: black;">
                 <div class="row" style="margin-left: 0px;">
                     <p style="margin-left:8px;margin-bottom: 0; padding: 0;line-height: 1; color:#1673f7;font-family: 'Magistral Honesty', sans-serif;">Sistema</p>
                     <p style="margin-top: 0; margin-bottom: 0; padding: 0;line-height: 1.1;font-size: 30px;background: linear-gradient(to right, #f32170, #ff6b08,#cf23cf, #eedd44); -webkit-text-fill-color: transparent;-webkit-background-clip: text;font-family: 'Magistral Honesty', sans-serif;">ACORDE</p>
@@ -101,9 +100,6 @@
                     MARCOS FELIPE ALMEIDA DIAS DA SILVA, RA 2004989<br>
                     RODRIGO OCTAVIO LOPES MENDES, RA 2005427
                 </small>
-
-
-
             </div>
         </div>
     </div>

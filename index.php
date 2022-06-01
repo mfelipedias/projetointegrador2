@@ -29,12 +29,13 @@
     <link href="http://fonts.cdnfonts.com/css/magistral-honesty" rel="stylesheet">
     <link href="http://fonts.cdnfonts.com/css/the-chatalestick" rel="stylesheet">
     <link href="http://fonts.cdnfonts.com/css/klubkatz" rel="stylesheet">
+    <link rel="stylesheet" href="css/headers.css">
 
 
 
 </head>
 
-<body class="bg-light" style="max-width: 1366px; margin-right:auto; margin-left:auto">
+<body style="max-width: 1366px; margin-right:auto; margin-left:auto">
     <?php
     session_start();
     if ((!isset($_SESSION['user']) == true) and (!isset($_SESSION['t_senha']) == true)) {
@@ -61,6 +62,15 @@
                     <p style="margin-top: 0; padding: 0;line-height: 1.1;font-size: 30px;background: linear-gradient(to right, #f32170, #ff6b08,#cf23cf, #eedd44); -webkit-text-fill-color: transparent;-webkit-background-clip: text;font-family: 'Magistral Honesty', sans-serif;">ACORDE</p>
                 </div>
             </a>
+            <div class="buttonColor">
+                <div class="ball"></div>
+                <script>
+                document.querySelector('.ball').addEventListener('click', (e)=>{
+                e.target.classList.toggle('ball-move');
+                document.body.classList.toggle('Contraste');
+                });
+                </script>
+            </div>
             <ul class="nav nav-pills">
                 <li class="nav-item"><a href="?pagina=home" class="nav-link hover" aria-current="page">Início</a></li>
                 <li class="nav-item"><a href="?pagina=alunos" class="nav-link hover">Alunos</a></li>
