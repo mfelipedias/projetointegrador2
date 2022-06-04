@@ -65,10 +65,10 @@
             <div class="buttonColor">
                 <div class="ball"></div>
                 <script>
-                document.querySelector('.ball').addEventListener('click', (e)=>{
-                e.target.classList.toggle('ball-move');
-                document.body.classList.toggle('Contraste');
-                });
+                    document.querySelector('.ball').addEventListener('click', (e) => {
+                        e.target.classList.toggle('ball-move');
+                        document.body.classList.toggle('Contraste');
+                    });
                 </script>
             </div>
             <ul class="nav nav-pills">
@@ -134,6 +134,22 @@
                     include './includes/alunos.php';
                     break;
                 case 'atividades':
+                    include './includes/atividades.php';
+                    break;
+                case 'atividades_add_ok':
+                    include './includes/return/sucesso.php';
+                    include './includes/atividades.php';
+                    break;
+                case 'atividades_del_ok':
+                    include './includes/return/aviso.php';
+                    include './includes/atividades.php';
+                    break;
+                case 'atividades_edit_ok':
+                    include './includes/return/sucesso.php';
+                    include './includes/atividades.php';
+                    break;
+                case 'atividades_add_erro':
+                    include './includes/return/erro.php';
                     include './includes/atividades.php';
                     break;
                 case 'tutores':

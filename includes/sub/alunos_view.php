@@ -59,11 +59,15 @@ while ($array = mysqli_fetch_array($busca)) {
                     <div class="col-lg-2">
                         <label class="form-label">Status:</label>
                         <div class="input-group">
-                            
-                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-circle-fill" style="color:<?php if ($a_status == 1) {echo 'green';} else {echo 'red';} ?>;"></i></span>
-                        <input class="form-control" type="text" value="<?php if ($a_status == 1) : echo "Ativo";
-                                                                        else : echo "Inativo";
-                                                                        endif; ?>" readonly>
+
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-circle-fill" style="color:<?php if ($a_status == 1) {
+                                                                                                                            echo 'green';
+                                                                                                                        } else {
+                                                                                                                            echo 'red';
+                                                                                                                        } ?>;"></i></span>
+                            <input class="form-control" type="text" value="<?php if ($a_status == 1) : echo "Ativo";
+                                                                            else : echo "Inativo";
+                                                                            endif; ?>" readonly>
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -125,9 +129,21 @@ while ($array = mysqli_fetch_array($busca)) {
                 <div class="input-group">
                     <select class="form-select" aria-label="Default select example" required>
                         <option selected>Filtrar...</option>
-                        <option value="1">Atividade 1</option>
-                        <option value="2">Atividade 2</option>
-                        <option value="3">Atividade 3</option>
+                        <?php
+                        include './scripts/conexao.php';
+                        $sql = "SELECT * FROM `atividades` ORDER BY at_nome ASC";
+                        $todos = mysqli_query($conexao, $sql);
+                        $contador = 0;
+                        while ($array = mysqli_fetch_array($todos)) {
+                            $contador = $contador + 1;
+                            $id_atividade = $array['id_atividade'];
+                            $at_nome = $array['at_nome'];
+                            $at_notamax = $array['at_notamax'];
+                            $at_notamin = $array['at_notamin'];
+                            $at_descricao = $array['at_descricao'];
+                        ?>
+                            <option value="<?php echo $id_atividade ?>"><?php echo $at_nome ?></option>
+                        <?php } ?>
                     </select>
                     <div class="input-group-prepend">
                         <button data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="bottom" data-bs-content="Pesquisar" href="#" type="submit" class="hover btn btn-outline-primary"><i class="bi bi-search"></i></button>
@@ -367,11 +383,11 @@ while ($array = mysqli_fetch_array($busca)) {
                         <div class="row">
                             <div class="col-xl-3">
                                 <label class="form-label">Código: </label>
-                                <input class="form-control" type="text" readonly>
+                                <input class="form-control" type="text" value="<?php echo $id_aluno?>" readonly>
                             </div>
                             <div class="col-xl-9">
                                 <label class="form-label">Aluno:</label>
-                                <input class="form-control" type="text" readonly>
+                                <input class="form-control" type="text" value="<?php echo $a_nome?>" readonly>
                             </div>
                         </div>
                         <div class="row">
@@ -382,9 +398,21 @@ while ($array = mysqli_fetch_array($busca)) {
                                     <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
                                     <select class="form-select" aria-label="Default select example">
                                         <option selected>Selecione...</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        <?php
+                                        include './scripts/conexao.php';
+                                        $sql = "SELECT * FROM `atividades` ORDER BY at_nome ASC";
+                                        $todos = mysqli_query($conexao, $sql);
+                                        $contador = 0;
+                                        while ($array = mysqli_fetch_array($todos)) {
+                                            $contador = $contador + 1;
+                                            $id_atividade = $array['id_atividade'];
+                                            $at_nome = $array['at_nome'];
+                                            $at_notamax = $array['at_notamax'];
+                                            $at_notamin = $array['at_notamin'];
+                                            $at_descricao = $array['at_descricao'];
+                                        ?>
+                                            <option value="<?php echo $id_atividade ?>"><?php echo $at_nome ?></option>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
@@ -407,7 +435,7 @@ while ($array = mysqli_fetch_array($busca)) {
 
                         <hr>
                         <label class="form-label">Tutor: </label>
-                        <input class="form-control" type="text" readonly>
+                        <input class="form-control" type="text" value="<?php echo $logado?>" readonly>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
