@@ -10,9 +10,9 @@ $filtro = $_GET['filtro'];
                 <p>
                 <div class="row justify-content-md-center">
                     <div class="col-md-auto">
-                        <form>
+                        <form action="./scripts/tutor_filtro.php" method="post">
                             <div class="input-group">
-                                <input type="text" class="form-control" id="pesquisa" placeholder="Nome">
+                                <input type="text" class="form-control" id="pesquisa" name="pesquisa" placeholder="Nome">
                                 <div class="input-group-prepend">
                                     <button data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="bottom" data-bs-content="Pesquisar" href="#" type="submit" class="hover btn btn-outline-primary"><i class="bi bi-search"></i></button>
                                 </div>

@@ -1,3 +1,15 @@
+<style>
+    .bg-coruja{
+    background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url(./img/coruja.png);background-repeat: no-repeat;
+    color:black;
+}
+
+.bg-card-black{
+    background-color: black;
+    color:white;
+}
+
+</style>
 <div class="row mb-3 bg-dark">
     <div class="card shadow-sm" style="background-image: url(./img/pen.png);background-size: 130px; background-repeat: no-repeat; background-position: 0% 50%; ">
         <div class="card-body" style="padding-bottom: 0; background-image: url(./img/logo_escola.png);background-size: 120px; background-repeat: no-repeat; background-position: 99% 50% ">
@@ -80,8 +92,9 @@
     <div class="col-xl-6">
         <h5><i class="bi bi-info-square" style="margin-right: 10px;"></i>Informaçoes gerais</h5>
         <hr>
-        <div class="card shadow-sm" style="height: 381px; background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url(./img/coruja.png);background-repeat: no-repeat;">
-            <div class="card-body" style="color: black;">
+        <div class="card shadow-sm" style="height: 381px; background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url(./img/coruja.png);background-repeat: no-repeat;
+    color:black;">
+            <div class="card-body">
                 <div class="row" style="margin-left: 0px;">
                     <p style="margin-left:8px;margin-bottom: 0; padding: 0;line-height: 1; color:#1673f7;font-family: 'Magistral Honesty', sans-serif;">Sistema</p>
                     <p style="margin-top: 0; margin-bottom: 0; padding: 0;line-height: 1.1;font-size: 30px;background: linear-gradient(to right, #f32170, #ff6b08,#cf23cf, #eedd44); -webkit-text-fill-color: transparent;-webkit-background-clip: text;font-family: 'Magistral Honesty', sans-serif;">ACORDE</p>

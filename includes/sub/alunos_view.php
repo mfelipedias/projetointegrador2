@@ -1,4 +1,8 @@
 <?php
+error_reporting(0);
+$filtro = $_GET['filtro'];
+?>
+<?php
 include './scripts/conexao.php';
 $id = $_GET['id'];
 $sql = "SELECT * FROM alunos WHERE id_aluno = $id";
@@ -125,10 +129,11 @@ while ($array = mysqli_fetch_array($busca)) {
     <div class="card shadow-sm mt-2 rounded">
         <div class="container">
             <h5 class="mt-3"><i class="bi bi-clipboard-data" style="margin-right: 10px;"></i>Atividades Registradas</h5>
-            <form>
+            <form action="./scripts/atv_aluno_filtro.php" method="post">
                 <div class="input-group">
-                    <select class="form-select" aria-label="Default select example" required>
-                        <option selected>Filtrar...</option>
+                    <select class="form-select" id="pesquisa" name="pesquisa" aria-label="Default select example" required>
+                        <option value="Todos">Filtrar...</option>
+                        <option value="Todos">Todos</option>
                         <?php
                         include './scripts/conexao.php';
                         $sql = "SELECT * FROM `atividades` ORDER BY at_nome ASC";
@@ -145,6 +150,7 @@ while ($array = mysqli_fetch_array($busca)) {
                             <option value="<?php echo $id_atividade ?>"><?php echo $at_nome ?></option>
                         <?php } ?>
                     </select>
+                    <input class="form-control" id="id" name="id" value="<?php echo $id ?>" hidden>
                     <div class="input-group-prepend">
                         <button data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="bottom" data-bs-content="Pesquisar" href="#" type="submit" class="hover btn btn-outline-primary"><i class="bi bi-search"></i></button>
                     </div>
@@ -155,32 +161,127 @@ while ($array = mysqli_fetch_array($busca)) {
                 <thead>
                     <tr>
                         <th scope="col">Data</th>
+                        <th scope="col">Tutor</th>
                         <th scope="col">Descrição</th>
                         <th scope="col">Nota</th>
                         <th scope="col">Observação</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">01/01/2022</th>
-                        <td>Identificação das letras</td>
-                        <td>90%</td>
-                        <td>O aluno apresentou poucas dificuldades dentre elas: as letras X e Y</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">01/01/2022</th>
-                        <td>Escrita do Nome</td>
-                        <td>50%</td>
-                        <td>O Aluno escreveu o nome com alguns erros, a atividade deve ser repetida</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">01/01/2022</th>
-                        <td>Encontros Vocálicos</td>
-                        <td>100%</td>
-                        <td>O Aluno não teve dificuldades na atividade</td>
-                    </tr>
+
+                    <?php
+                    include './scripts/conexao.php';
+                    if ($filtro == "") {
+                        $sql = "SELECT * FROM `atv_aluno` INNER JOIN `alunos` ON atv_aluno=id_aluno 
+                        INNER JOIN `tutores` ON atv_tutor=id_tutor
+                        INNER JOIN  `atividades` ON atv_atividade=id_atividade WHERE atv_aluno=$id
+                        ORDER BY atv_create ASC";
+                    } else {
+                        $sql = $filtro;
+                    }
+                    $total_reg = "15"; // número de registros por página
+                    $pag = $_GET['pag'];
+                    if (!$pag) {
+                        $pc = "1";
+                    } else {
+                        $pc = $pag;
+                    }
+                    $inicio = $pc - 1;
+                    $inicio = $inicio * $total_reg;
+
+                    $limite = mysqli_query($conexao, "$sql LIMIT $inicio, $total_reg");
+                    $todos = mysqli_query($conexao, $sql);
+
+                    $tr = mysqli_num_rows($todos); // verifica o número total de registros
+                    $tp = $tr / $total_reg; // verifica o número total de páginas
+
+                    $busca = mysqli_query($conexao, $sql);
+                    $contador = 0;
+                    while ($array = mysqli_fetch_array($limite)) {
+
+                        $contador = $contador + 1;
+                        $id_atv = $array['id_atv'];
+                        $atv_atividade = $array['atv_atividade'];
+                        $atv_aluno = $array['atv_aluno'];
+                        $atv_tutor = $array['atv_tutor'];
+                        $atv_nota = $array['atv_nota'];
+                        $atv_obs = $array['atv_obs'];
+                        $atv_create = $array['atv_create'];
+                        $atv_update = $array['atv_update'];
+                        $at_nome = $array['at_nome'];
+                        $t_nome = $array['t_nome'];
+                        $a_nome = $array['a_nome'];
+
+                    ?>
+                        <tr>
+                            <th scope="row"><?php echo date('d/m/Y H:i:s', strtotime($atv_create)); ?></th>
+                            <td><?php echo $t_nome ?></td>
+                            <td><?php echo $at_nome ?></td>
+                            <td><?php echo $atv_nota ?>%</td>
+                            <td><?php echo $atv_obs ?></td>
+                        <?php } ?>
+                        </tr>
                 </tbody>
             </table>
+            <center><?php
+                    $anterior = $pc - 1;
+                    $proximo = $pc + 1;
+                    if ($pc > 1) {
+                        echo "
+                      </style>
+                      <a style='appearance: none;
+                      text-decoration: none;
+                      background-color: #FAFBFC;
+                      border: 1px solid rgba(27, 31, 35, 0.15);
+                      border-radius: 6px;
+                      box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+                      box-sizing: border-box;
+                      color: #24292E;
+                      cursor: pointer;
+                      display: inline-block;
+                      font-family: -apple-system, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+                      font-size: 14px;
+                      font-weight: 500;
+                      line-height: 20px;
+                      list-style: none;
+                      padding: 6px 16px;
+                      position: relative;
+                      transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+                      user-select: none;
+                      -webkit-user-select: none;
+                      touch-action: manipulation;
+                      vertical-align: middle;
+                      white-space: nowrap;
+                      word-wrap: break-word;' href='?pagina=alunos_view&&id=$id&&pag=$anterior'>Anterior</a>";
+                    }
+                    echo "&nbsp | &nbsp";
+                    if ($pc < $tp) {
+                        echo "<a style='appearance: none;
+                      text-decoration: none;
+                      background-color: #FAFBFC;
+                      border: 1px solid rgba(27, 31, 35, 0.15);
+                      border-radius: 6px;
+                      box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+                      box-sizing: border-box;
+                      color: #24292E;
+                      cursor: pointer;
+                      display: inline-block;
+                      font-family: -apple-system, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+                      font-size: 14px;
+                      font-weight: 500;
+                      line-height: 20px;
+                      list-style: none;
+                      padding: 6px 16px;
+                      position: relative;
+                      transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+                      user-select: none;
+                      -webkit-user-select: none;
+                      touch-action: manipulation;
+                      vertical-align: middle;
+                      white-space: nowrap;
+                      word-wrap: break-word;' href='?pagina=alunos_view&&id=$id&&pag=$proximo'>Próxima</a>";
+                    }
+                    ?></center>
         </div>
     </div>
 </div>
@@ -196,81 +297,43 @@ while ($array = mysqli_fetch_array($busca)) {
 
             function drawTrendlines() {
                 var data = new google.visualization.DataTable();
-                data.addColumn('number', 'X');
-                data.addColumn('number', 'Atividade 1');
-                data.addColumn('number', 'Atividade 2');
+
+                data.addColumn('number', 'Data');
+                <?php
+                        include './scripts/conexao.php';
+                        $sql = "SELECT * FROM `atividades` ORDER BY at_nome ASC";
+                        $todos = mysqli_query($conexao, $sql);
+                        while ($array = mysqli_fetch_array($todos)) {
+                            $at_nome = $array['at_nome'];
+                        ?>
+                data.addColumn('number', '<?php echo $at_nome?>');
+                <?php } ?>
 
                 data.addRows([
-                    [0, 0, 0],
-                    [1, 10, 5],
-                    [2, 23, 15],
-                    [3, 17, 9],
-                    [4, 18, 10],
-                    [5, 9, 5],
-                    [6, 11, 3],
-                    [7, 27, 19],
-                    [8, 33, 25],
-                    [9, 40, 32],
-                    [10, 32, 24],
-                    [11, 35, 27],
-                    [12, 30, 22],
-                    [13, 40, 32],
-                    [14, 42, 34],
-                    [15, 47, 39],
-                    [16, 44, 36],
-                    [17, 48, 40],
-                    [18, 52, 44],
-                    [19, 54, 46],
-                    [20, 42, 34],
-                    [21, 55, 47],
-                    [22, 56, 48],
-                    [23, 57, 49],
-                    [24, 60, 52],
-                    [25, 50, 42],
-                    [26, 52, 44],
-                    [27, 51, 43],
-                    [28, 49, 41],
-                    [29, 53, 45],
-                    [30, 55, 47],
-                    [31, 60, 52],
-                    [32, 61, 53],
-                    [33, 59, 51],
-                    [34, 62, 54],
-                    [35, 65, 57],
-                    [36, 62, 54],
-                    [37, 58, 50],
-                    [38, 55, 47],
-                    [39, 61, 53],
-                    [40, 64, 56],
-                    [41, 65, 57],
-                    [42, 63, 55],
-                    [43, 66, 58],
-                    [44, 67, 59],
-                    [45, 69, 61],
-                    [46, 69, 61],
-                    [47, 70, 62],
-                    [48, 72, 64],
-                    [49, 68, 60],
-                    [50, 66, 58],
-                    [51, 65, 57],
-                    [52, 67, 59],
-                    [53, 70, 62],
-                    [54, 71, 63],
-                    [55, 72, 64],
-                    [56, 73, 65],
-                    [57, 75, 67],
-                    [58, 70, 62],
-                    [59, 68, 60],
-                    [60, 64, 56],
-                    [61, 60, 52],
-                    [62, 65, 57],
-                    [63, 67, 59],
-                    [64, 68, 60],
-                    [65, 69, 61],
-                    [66, 70, 62],
-                    [67, 72, 64],
-                    [68, 75, 67],
-                    [69, 80, 72]
+                    <?php
+                        include './scripts/conexao.php';
+                        $sql = "SELECT * FROM `atv_aluno` INNER JOIN `alunos` ON atv_aluno=id_aluno INNER JOIN `tutores` ON atv_tutor=id_tutor INNER JOIN  `atividades` ON atv_atividade=id_atividade WHERE atv_aluno=$id ORDER BY atv_create ASC";
+                        $todos = mysqli_query($conexao, $sql);
+                        $contador = 0;
+                        while ($array = mysqli_fetch_array($todos)) {
+                            $contador=$contador+1;
+                            $id_atv = $array['id_atv'];
+                            $atv_atividade = $array['atv_atividade'];
+                            $atv_aluno = $array['atv_aluno'];
+                            $atv_tutor = $array['atv_tutor'];
+                            $atv_nota = $array['atv_nota'];
+                            $atv_obs = $array['atv_obs'];
+                            $atv_create = $array['atv_create'];
+                            $atv_update = $array['atv_update'];
+                            $at_nome = $array['at_nome'];
+                            $t_nome = $array['t_nome'];
+                            $a_nome = $array['a_nome'];
+                        ?>
+                    [<?php echo $contador?>, <?php echo $atv_nota?>, 0, 0, 0, 0],
+                    <?php } ?>
+                    [1, 10, 5, 0, 0, 0],
+                    [2, 23, 15, 0, 0, 0],
+                    [69, 80, 72, 0, 0, 0]
                 ]);
 
                 var options = {
@@ -281,18 +344,6 @@ while ($array = mysqli_fetch_array($busca)) {
                         title: 'Notas'
                     },
                     colors: ['#AB0D06', '#007329'],
-                    trendlines: {
-                        0: {
-                            type: 'exponential',
-                            color: '#333',
-                            opacity: 1
-                        },
-                        1: {
-                            type: 'linear',
-                            color: '#111',
-                            opacity: .3
-                        }
-                    }
                 };
 
                 var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
@@ -379,15 +430,15 @@ while ($array = mysqli_fetch_array($busca)) {
             </div>
             <div class="modal-body">
                 <div class="container mb-2" style="max-width: 900px;">
-                    <form>
+                    <form action="./scripts/atv_aluno_add.php" method="post">
                         <div class="row">
                             <div class="col-xl-3">
                                 <label class="form-label">Código: </label>
-                                <input class="form-control" type="text" value="<?php echo $id_aluno?>" readonly>
+                                <input class="form-control" type="text" id="atv_aluno" name="atv_aluno" value="<?php echo $id_aluno ?>" readonly>
                             </div>
                             <div class="col-xl-9">
                                 <label class="form-label">Aluno:</label>
-                                <input class="form-control" type="text" value="<?php echo $a_nome?>" readonly>
+                                <input class="form-control" type="text" value="<?php echo $a_nome ?>" readonly>
                             </div>
                         </div>
                         <div class="row">
@@ -396,7 +447,7 @@ while ($array = mysqli_fetch_array($busca)) {
                                 <label class="form-label">Atividade Realizada:</label>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
-                                    <select class="form-select" aria-label="Default select example">
+                                    <select class="form-select" id="atv_atividade" name="atv_atividade">
                                         <option selected>Selecione...</option>
                                         <?php
                                         include './scripts/conexao.php';
@@ -419,7 +470,7 @@ while ($array = mysqli_fetch_array($busca)) {
                             <div class="col-md-3">
 
                                 <label class="form-label">Nota: </label>
-                                <input class="form-control" type="text" required>
+                                <input class="form-control" type="number" id="atv_nota" name="atv_nota" required>
 
                             </div>
 
@@ -427,15 +478,16 @@ while ($array = mysqli_fetch_array($busca)) {
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="exampleFormControlTextarea1" class="form-label">Observações: </label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <label class="form-label">Observações: </label>
+                                    <textarea class="form-control" id="atv_obs" name="atv_obs" rows="3"></textarea>
                                 </div>
                             </div>
                         </div>
 
                         <hr>
                         <label class="form-label">Tutor: </label>
-                        <input class="form-control" type="text" value="<?php echo $logado?>" readonly>
+                        <input class="form-control" type="text" value="<?php echo $logado ?>" readonly>
+                        <input class="form-control" type="text" id="atv_tutor" name="atv_tutor" value="<?php echo $id_tutor ?>" readonly>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>

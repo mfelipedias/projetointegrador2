@@ -10,9 +10,9 @@ $filtro = $_GET['filtro'];
                 <p>
                 <div class="row justify-content-md-center">
                     <div class="col-md-auto">
-                        <form>
+                        <form action="./scripts/atividade_filtro.php" method="post">
                             <div class="input-group">
-                                <input type="text" class="form-control" id="pesquisa" placeholder="Nome" required>
+                                <input type="text" class="form-control" id="pesquisa" name="pesquisa" placeholder="Nome">
                                 <div class="input-group-prepend">
                                     <button data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="bottom" data-bs-content="Pesquisar" href="#" type="submit" class="hover btn btn-outline-primary"><i class="bi bi-search"></i></button>
                                 </div>
@@ -125,11 +125,11 @@ $filtro = $_GET['filtro'];
                                             </div>
                                             <div class="mb-3">
                                                 <label for="at_notamax" class="form-label">Nota Máxima</label>
-                                                <input type="text" class="form-control" id="at_notamax" name="at_notamax" value="<?php echo $at_notamax ?>" required>
+                                                <input type="number" class="form-control" id="at_notamax" name="at_notamax" value="<?php echo $at_notamax ?>" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="at_notamin" class="form-label">Nota Esperada</label>
-                                                <input type="text" class="form-control" id="at_notamin" name="at_notamin" value="<?php echo $at_notamin ?>" required>
+                                                <input type="number" class="form-control" id="at_notamin" name="at_notamin" value="<?php echo $at_notamin ?>" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="at_descricao" class="form-label">Descrição</label>
@@ -228,11 +228,11 @@ $filtro = $_GET['filtro'];
                     </div>
                     <div class="mb-3">
                         <label for="at_notamax" class="form-label">Nota Máxima</label>
-                        <input type="text" class="form-control" id="at_notamax" name="at_notamax" required>
+                        <input type="number" class="form-control" id="at_notamax" name="at_notamax" required>
                     </div>
                     <div class="mb-3">
                         <label for="at_notamin" class="form-label">Nota Esperada</label>
-                        <input type="text" class="form-control" id="at_notamin" name="at_notamin" required>
+                        <input type="number" class="form-control" id="at_notamin" name="at_notamin" required>
                     </div>
                     <div class="mb-3">
                         <label for="at_descricao" class="form-label">Descrição</label>

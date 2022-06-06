@@ -39,7 +39,7 @@
     <?php
     session_start();
     if ((!isset($_SESSION['user']) == true) and (!isset($_SESSION['t_senha']) == true)) {
-        unset($_SESSION['id_tutores']);
+        unset($_SESSION['id_tutor']);
         unset($_SESSION['t_nome']);
         unset($_SESSION['t_senha']);
         unset($_SESSION['t_funcao']);
@@ -49,7 +49,7 @@
         header('location: ./login.php');
     }
     $logado = $_SESSION['t_nome'];
-    $id_tutores = $_SESSION['id_tutores'];
+    $id_tutor = $_SESSION['id_tutor'];
     $funcao = $_SESSION['t_funcao'];
     ?>
     <div class="row">
@@ -110,12 +110,15 @@
                 case 'alunos_view':
                     include './includes/sub/alunos_view.php';
                     break;
+                case 'atv_aluno_add':
+                    include './includes/return/sucesso.php';
+                    include './includes/sub/alunos_view.php';
+                    break;
                 case 'alunos_edit':
                     include './includes/sub/alunos_edit.php';
                     break;
                 case 'alunos_add':
                     include './includes/sub/alunos_add.php';
-                    break;
                     break;
                 case 'alunos_add_ok':
                     include './includes/return/sucesso.php';
@@ -138,6 +141,10 @@
                     break;
                 case 'atividades_add_ok':
                     include './includes/return/sucesso.php';
+                    include './includes/atividades.php';
+                    break;
+                case 'atividades_del_ok':
+                    include './includes/return/aviso.php';
                     include './includes/atividades.php';
                     break;
                 case 'atividades_del_ok':

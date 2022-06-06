@@ -16,7 +16,7 @@ if ($total == 0) {
     header("Location: ../login.php?retorno=" . $erro1);
 } else {
     while ($array = mysqli_fetch_array($buscar)) {
-        $id_tutores = $array['id_tutores'];
+        $id_tutor = $array['id_tutor'];
         $t_nome = $array['t_nome'];
         $t_senha = $array['t_senha'];
         $t_status = $array['t_status'];
@@ -26,7 +26,7 @@ if ($total == 0) {
         if ($total > 0) {
             if ($senhacod == $t_senha) {
                 if ($t_status == 1) {
-                    $_SESSION['id_tutores'] = $id_usuario;
+                    $_SESSION['id_tutor'] = $id_tutor;
                     $_SESSION['t_nome'] = $t_nome;
                     $_SESSION['t_senha'] = $t_senha;
                     $_SESSION['t_funcao'] = $t_funcao;
