@@ -288,70 +288,100 @@ while ($array = mysqli_fetch_array($busca)) {
 
 <div class="row mt-3">
     <div class="card shadow-sm mt-2 rounded">
-        <div id="chart_div"></div>
-        <script>
-            google.charts.load('current', {
-                packages: ['corechart', 'line']
-            });
-            google.charts.setOnLoadCallback(drawTrendlines);
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-            function drawTrendlines() {
-                var data = new google.visualization.DataTable();
+        <?php
+        include './scripts/conexao.php';
+        $sql = "SELECT * FROM `atividades` ORDER BY at_nome ASC";
+        $todos = mysqli_query($conexao, $sql);
 
-                data.addColumn('number', 'Data');
-                <?php
+        while ($array = mysqli_fetch_array($todos)) {
+            $id_atividade = $array['id_atividade'];
+            $at_nome = $array['at_nome'];
+        ?>
+            <script type="text/javascript">
+                google.charts.load('current', {
+                    'packages': ['line', 'corechart']
+                });
+                google.charts.setOnLoadCallback(drawChart);
+
+                function drawChart() {
+                    var chartDiv = document.getElementById('chart_div<?php echo $id_atividade; ?>');
+
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('date', 'Data');
+                    data.addColumn('number', "<?php echo $at_nome; ?>");
+
+                    data.addRows([
+                       
+                        <?php
                         include './scripts/conexao.php';
-                        $sql = "SELECT * FROM `atividades` ORDER BY at_nome ASC";
-                        $todos = mysqli_query($conexao, $sql);
-                        while ($array = mysqli_fetch_array($todos)) {
-                            $at_nome = $array['at_nome'];
+                        $sql_ = "SELECT * FROM `atv_aluno` INNER JOIN `alunos` ON atv_aluno=id_aluno INNER JOIN `tutores` ON atv_tutor=id_tutor INNER JOIN  `atividades` ON atv_atividade=id_atividade WHERE atv_aluno=$id AND atv_atividade=$id_atividade  ORDER BY atv_create ASC";
+                        $todos_ = mysqli_query($conexao, $sql_);
+                        while ($array = mysqli_fetch_array($todos_)) {
+                            $atv__aluno = $array['atv_aluno'];
+                            $atv__nota = $array['atv_nota'];
+                            $atv__create = $array['atv_create'];
+                            $ano = substr($atv__create,0,4);
+                            $mes = substr($atv__create,5,2);
+                            $dia = substr($atv__create,8,2);
+                            $hora = substr($atv__create,11,2);
+                            $minuto = substr($atv__create,14,2);
+                            $segundo = substr($atv__create,17,2);
+
                         ?>
-                data.addColumn('number', '<?php echo $at_nome?>');
-                <?php } ?>
+                        [new Date(<?php echo $ano;?>, <?php echo $mes;?>, <?php echo $dia;?>), <?php echo $atv__nota ?>],
+                        
+                        <?php } ?>
+                    ]);
 
-                data.addRows([
-                    <?php
-                        include './scripts/conexao.php';
-                        $sql = "SELECT * FROM `atv_aluno` INNER JOIN `alunos` ON atv_aluno=id_aluno INNER JOIN `tutores` ON atv_tutor=id_tutor INNER JOIN  `atividades` ON atv_atividade=id_atividade WHERE atv_aluno=$id ORDER BY atv_create ASC";
-                        $todos = mysqli_query($conexao, $sql);
-                        $contador = 0;
-                        while ($array = mysqli_fetch_array($todos)) {
-                            $contador=$contador+1;
-                            $id_atv = $array['id_atv'];
-                            $atv_atividade = $array['atv_atividade'];
-                            $atv_aluno = $array['atv_aluno'];
-                            $atv_tutor = $array['atv_tutor'];
-                            $atv_nota = $array['atv_nota'];
-                            $atv_obs = $array['atv_obs'];
-                            $atv_create = $array['atv_create'];
-                            $atv_update = $array['atv_update'];
-                            $at_nome = $array['at_nome'];
-                            $t_nome = $array['t_nome'];
-                            $a_nome = $array['a_nome'];
-                        ?>
-                    [<?php echo $contador?>, <?php echo $atv_nota?>, 0, 0, 0, 0],
-                    <?php } ?>
-                    [1, 10, 5, 0, 0, 0],
-                    [2, 23, 15, 0, 0, 0],
-                    [69, 80, 72, 0, 0, 0]
-                ]);
+                    var classicOptions = {
+                        title: 'Grafico da atividade de <?php echo $at_nome;?>',
+                        width: 1000,
+                        height: 500,
+                        // Gives each series an axis that matches the vAxes number below.
+                        series: {
+                            0: {
+                                targetAxisIndex: 0
+                            },
+                            1: {
+                                targetAxisIndex: 1
+                            }
+                        },
+                        vAxes: {
+                            // Adds titles to each axis.
+                            0: {
+                                title: 'Nota'
+                            },
+                            1: {
+                                title: 'Daylight'
+                            }
+                        },
 
-                var options = {
-                    hAxis: {
-                        title: 'Registro'
-                    },
-                    vAxis: {
-                        title: 'Notas'
-                    },
-                    colors: ['#AB0D06', '#007329'],
-                };
+                        vAxis: {
+                            viewWindow: {
+                                max: 100
+                            }
+                        }
+                    };
 
-                var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-                chart.draw(data, options);
-            }
-        </script>
+                    function drawClassicChart() {
+                        var classicChart = new google.visualization.LineChart(chartDiv);
+                        classicChart.draw(data, classicOptions);
+                    }
+
+                    drawClassicChart();
+
+                }
+            </script>
+            <center><div id="chart_div<?php echo $id_atividade ?>"></div></center>
+        <?php } ?>
     </div>
 </div>
+
+
+
+
 <!-- Modal EDITAR DADOS DO ALUNO-->
 <div class="modal fade" id="modalAluno" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
