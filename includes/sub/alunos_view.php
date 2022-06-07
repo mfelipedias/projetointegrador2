@@ -313,30 +313,38 @@ while ($array = mysqli_fetch_array($busca)) {
                     data.addColumn('number', "<?php echo $at_nome; ?>");
 
                     data.addRows([
-                       
+
                         <?php
                         include './scripts/conexao.php';
                         $sql_ = "SELECT * FROM `atv_aluno` INNER JOIN `alunos` ON atv_aluno=id_aluno INNER JOIN `tutores` ON atv_tutor=id_tutor INNER JOIN  `atividades` ON atv_atividade=id_atividade WHERE atv_aluno=$id AND atv_atividade=$id_atividade  ORDER BY atv_create ASC";
                         $todos_ = mysqli_query($conexao, $sql_);
+                        $contador = 0;
                         while ($array = mysqli_fetch_array($todos_)) {
+
                             $atv__aluno = $array['atv_aluno'];
                             $atv__nota = $array['atv_nota'];
                             $atv__create = $array['atv_create'];
-                            $ano = substr($atv__create,0,4);
-                            $mes = substr($atv__create,5,2);
-                            $dia = substr($atv__create,8,2);
-                            $hora = substr($atv__create,11,2);
-                            $minuto = substr($atv__create,14,2);
-                            $segundo = substr($atv__create,17,2);
+                            $ano = substr($atv__create, 0, 4);
+                            $mes = substr($atv__create, 5, 2);
+                            $dia = substr($atv__create, 8, 2);
+                            $hora = substr($atv__create, 11, 2);
+                            $minuto = substr($atv__create, 14, 2);
+                            $segundo = substr($atv__create, 17, 2);
 
                         ?>
-                        [new Date(<?php echo $ano;?>, <?php echo $mes;?>, <?php echo $dia;?>), <?php echo $atv__nota ?>],
-                        
+                            <?php
+                            while ($contador <= 1) {
+                            
+                                $contador = $contador + 1;?>
+                                [new Date(<?php echo $ano; ?>, <?php echo $mes; ?>, <?php echo $dia - 1; ?>), 0],
+                            <?php } ?>
+                            [new Date(<?php echo $ano; ?>, <?php echo $mes; ?>, <?php echo $dia; ?>), <?php echo $atv__nota ?>],
+
                         <?php } ?>
                     ]);
 
                     var classicOptions = {
-                        title: 'Grafico da atividade de <?php echo $at_nome;?>',
+                        title: 'Grafico da atividade de <?php echo $at_nome; ?>',
                         width: 1000,
                         height: 500,
                         // Gives each series an axis that matches the vAxes number below.
@@ -374,7 +382,9 @@ while ($array = mysqli_fetch_array($busca)) {
 
                 }
             </script>
-            <center><div id="chart_div<?php echo $id_atividade ?>"></div></center>
+            <center>
+                <div id="chart_div<?php echo $id_atividade ?>"></div>
+            </center>
         <?php } ?>
     </div>
 </div>
