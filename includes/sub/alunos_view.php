@@ -334,7 +334,6 @@ while ($array = mysqli_fetch_array($busca)) {
                         ?>
                             <?php
                             while ($contador <= 1) {
-                            
                                 $contador = $contador + 1;?>
                                 [new Date(<?php echo $ano; ?>, <?php echo $mes; ?>, <?php echo $dia - 1; ?>), 0],
                             <?php } ?>
