@@ -10,7 +10,7 @@
             <center>
                 <p class="lead text-muted" style="font-size:25px;font-family: 'My Big Heart Demo', sans-serif; ">E.E. Profª. Hermelina de Albuquerque Passarela</p>
                 <p>
-                    <a class="bi hover bi-vector-pen mx-2" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="bottom" data-bs-content="Criar Aviso" href="#" style="font-size: 30px;"></a>
+                    <a class="bi hover bi-vector-pen mx-2" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="bottom" data-bs-content="Criar Aviso" href="?pagina=aviso" style="font-size: 30px;"></a>
                     <a class="bi hover bi-facebook mx-2" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="bottom" data-bs-content="Facebook" href="#" style="font-size: 30px;"></a>
                     <a class="bi hover bi-instagram mx-2" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="bottom" data-bs-content="Instagram" href="#" style="font-size: 30px;"></a>
                     <a class="bi hover bi-envelope-paper mx-2" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="bottom" data-bs-content="Email" href="#" style="font-size: 30px;"></a>
