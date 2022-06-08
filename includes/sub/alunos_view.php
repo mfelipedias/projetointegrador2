@@ -85,7 +85,6 @@ while ($array = mysqli_fetch_array($busca)) {
                     </div>
                 </div>
                 <div class="row">
-
                     <div class="col-lg-12">
                         <label class="form-label">Nome:</label>
                         <input class="form-control" type="text" value="<?php echo $a_nome; ?>" readonly>
@@ -298,6 +297,7 @@ while ($array = mysqli_fetch_array($busca)) {
         while ($array = mysqli_fetch_array($todos)) {
             $id_atividade = $array['id_atividade'];
             $at_nome = $array['at_nome'];
+            $at_notamax = $array['at_notamax'];
         ?>
             <script type="text/javascript">
                 google.charts.load('current', {
@@ -367,7 +367,7 @@ while ($array = mysqli_fetch_array($busca)) {
 
                         vAxis: {
                             viewWindow: {
-                                max: 100
+                                max: <?php echo $at_notamax?>
                             }
                         }
                     };

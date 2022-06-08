@@ -104,6 +104,13 @@
                 case 'inicio':
                     include './includes/home.php';
                     break;
+                case 'aviso':
+                    include './includes/sub/avisos_add.php';
+                    break;
+                case 'aviso_add_ok':
+                    include './includes/return/sucesso.php';
+                    include './includes/home.php';
+                    break;
                 case 'alunos':
                     include './includes/alunos.php';
                     break;
