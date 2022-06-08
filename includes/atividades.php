@@ -89,7 +89,7 @@ $filtro = $_GET['filtro'];
                         <td>
                             <div class="btn-group" role="group" aria-label="..."><button class="btn btn-outline-primary" href="#" data-bs-toggle="modal" data-bs-target="#modalEditar<?php echo $id_atividade ?>"><i class="bi bi-pen"></i></button><button class="btn btn-outline-danger" href="" data-bs-toggle="modal" data-bs-target="#modalExcluir<?php echo $id_atividade ?>"><i class="bi bi-trash"></i></button></div>
                         </td>
-                        <div class="modal fade" id="modalExcluir<?php echo $id_atividade ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="modalExcluir<?php echo $id_atividade ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color:black;">
                             <div class="modal-dialog" role="document" style="width: 380px; transition: bottom .75s ease-in-out">
                                 <div class="modal-content rounded-6 shadow" style="border-radius: .75rem;">
                                     <div class="modal-header border-bottom-0">
@@ -106,7 +106,7 @@ $filtro = $_GET['filtro'];
                                 </div>
                             </div>
                         </div>
-                        <div class="modal fade" id="modalEditar<?php echo $id_atividade ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="modalEditar<?php echo $id_atividade ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color:black;">
                             <div class="modal-dialog" role="document" style="transition: bottom .75s ease-in-out">
                                 <div class="modal-content rounded-6 shadow" style="border-radius: .75rem;">
                                     <div class="modal-header">
