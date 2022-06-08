@@ -24,6 +24,11 @@
         .hover:hover {
             color: #E74C3C
         }
+        .janela2 {
+            font-size: 15px;
+            background-color: black !important;
+            color: white !important;
+        }
     </style>
     <link href="http://fonts.cdnfonts.com/css/my-big-heart-demo" rel="stylesheet">
     <link href="http://fonts.cdnfonts.com/css/magistral-honesty" rel="stylesheet">
@@ -35,7 +40,7 @@
 
 </head>
 
-<body style="max-width: 1366px; margin-right:auto; margin-left:auto">
+<body style="max-width: 1366px; margin-right:auto; margin-left:auto; color: black;">
     <?php
     session_start();
     if ((!isset($_SESSION['user']) == true) and (!isset($_SESSION['t_senha']) == true)) {
@@ -54,9 +59,9 @@
     ?>
     <div class="row">
 
-        <header class="bg-white navbar shadow rounded d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-1 mb-2 border-bottom" style=" margin-right:auto; margin-left:auto">
+        <header class="navbar shadow rounded d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-1 mb-2 border-bottom divContr" style=" margin-right:auto; margin-left:auto">
             <a href="#" class="d-flex align-items-center col-md-3 mb-md-0 text-dark text-decoration-none">
-                <img src="./img/coruja.png" width="40" role="img" class="img-fluid">
+                <img src="./img/coruja.png" width="40" role="img" class="img-fluid" style="background-color: white;">
                 <div class="row" style="height:30px;margin:0px">
                     <p style="margin-left:8px;margin-bottom: 0; padding: 0;line-height: 1; color:#1673f7;font-family: 'Magistral Honesty', sans-serif;">Sistema</p>
                     <p style="margin-top: 0; padding: 0;line-height: 1.1;font-size: 30px;background: linear-gradient(to right, #f32170, #ff6b08,#cf23cf, #eedd44); -webkit-text-fill-color: transparent;-webkit-background-clip: text;font-family: 'Magistral Honesty', sans-serif;">ACORDE</p>
@@ -64,12 +69,6 @@
             </a>
             <div class="buttonColor">
                 <div class="ball"></div>
-                <script>
-                    document.querySelector('.ball').addEventListener('click', (e) => {
-                        e.target.classList.toggle('ball-move');
-                        document.body.classList.toggle('Contraste');
-                    });
-                </script>
             </div>
             <ul class="nav nav-pills">
                 <li class="nav-item"><a href="?pagina=home" class="nav-link hover" aria-current="page">Início</a></li>
@@ -80,7 +79,7 @@
             </ul>
             <div class="col-md-3 text-end">
                 <div class="dropdown text-end">
-                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a href="#" class="d-block text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                         <label style="margin-right:15px;">Bem vindo, <b style="color:#E74C3C;"><?php echo $logado ?>!</b></label>
                         <img src="./img/user.jpg" alt="mdo" width="35" height="35" class="rounded-circle">
                     </a>
@@ -212,7 +211,19 @@
         </ul>
     </footer>
 
-
+                <script>
+                    document.querySelector('.ball').addEventListener('click', (e) => {
+                        e.target.classList.toggle('ball-move');
+                        document.body.classList.toggle('Contraste');
+                        
+                        var els = document.getElementsByClassName("divContr");
+                        
+                        Array.prototype.forEach.call(els,
+                        function(el){
+                            el.classList.toggle('janela2');                      
+                        })
+                    });
+                </script>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
