@@ -40,7 +40,7 @@
     border-radius: 25px;
     box-shadow: 0 0 2.5px 0 #39a2db59;
     cursor: pointer;
-    background-color: #ffffff;
+    background-color: #353535;
 }
 
 .ball {
@@ -50,7 +50,6 @@
     width: 20px;
     height: 100%;
     border-radius: 50%;
-    background-color: #053742;
     transition: left 1s;
 }
 

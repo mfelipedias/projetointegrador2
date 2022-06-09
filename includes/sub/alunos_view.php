@@ -27,7 +27,7 @@ while ($array = mysqli_fetch_array($busca)) {
 }
 ?>
 <div class="row mb-3">
-    <div class="card shadow-sm" style="background-image: url(./img/pen.png);background-size: 130px; background-repeat: no-repeat; background-position: 0% 50%; ">
+    <div class="card shadow-sm divContr" style="background-image: url(./img/pen.png);background-size: 130px; background-repeat: no-repeat; background-position: 0% 50%; ">
         <div class="card-body" style="padding-bottom: 0; background-image: url(./img/logo_escola.png);background-size: 120px; background-repeat: no-repeat; background-position: 99% 50% ">
             <center>
                 <p class="lead text-muted" style="font-size:25px;font-family: 'My Big Heart Demo', sans-serif; ">Relatório do Aluno</p>
@@ -50,7 +50,7 @@ while ($array = mysqli_fetch_array($busca)) {
 </div>
 
 <div class="row">
-    <div class="card shadow-sm" style=" background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url(./img/coruja.png);background-repeat: no-repeat;">
+    <div class="card shadow-sm divContr">
         <div class="card-body">
             <div class="container" style="max-width: 900px;">
                 <h5><i class="bi bi-mortarboard" style="margin-right: 10px;"></i>Dados do Aluno</h5>
@@ -125,7 +125,7 @@ while ($array = mysqli_fetch_array($busca)) {
 </div>
 
 <div class="row mt-3">
-    <div class="card shadow-sm mt-2 rounded">
+    <div class="card shadow-sm mt-2 rounded divContr">
         <div class="container">
             <h5 class="mt-3"><i class="bi bi-clipboard-data" style="margin-right: 10px;"></i>Atividades Registradas</h5>
             <form action="./scripts/atv_aluno_filtro.php" method="post">
@@ -156,7 +156,7 @@ while ($array = mysqli_fetch_array($busca)) {
                 </div>
             </form>
             <hr>
-            <table class="table table-hover">
+            <table class="table table-hover divContr">
                 <thead>
                     <tr>
                         <th scope="col">Data</th>
@@ -286,7 +286,7 @@ while ($array = mysqli_fetch_array($busca)) {
 </div>
 
 <div class="row mt-3">
-    <div class="card shadow-sm mt-2 rounded">
+    <div class="card shadow-sm mt-2 rounded divContr">
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
         <?php

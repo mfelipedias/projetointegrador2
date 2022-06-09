@@ -67,8 +67,9 @@
                     <p style="margin-top: 0; padding: 0;line-height: 1.1;font-size: 30px;background: linear-gradient(to right, #f32170, #ff6b08,#cf23cf, #eedd44); -webkit-text-fill-color: transparent;-webkit-background-clip: text;font-family: 'Magistral Honesty', sans-serif;">ACORDE</p>
                 </div>
             </a>
-            <div class="buttonColor">
-                <div class="ball"></div>
+            Modo Claro/Escuro
+            <div class="buttonColor" style="background-color: #b0b0b0">
+                <div class="ball" style="background-color: #353535"></div>
             </div>
             <ul class="nav nav-pills">
                 <li class="nav-item"><a href="?pagina=home" class="nav-link hover" aria-current="page">Início</a></li>
