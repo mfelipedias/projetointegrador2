@@ -76,12 +76,12 @@ while ($array = mysqli_fetch_array($busca)) {
                     </div>
                     <div class="col-lg-4">
                         <label class="form-label">Cadastro:</label>
-                        <input class="form-control" type="text" value="<?php echo $a_create; ?>" readonly>
+                        <input class="form-control" type="text" value="<?php echo date('d/m/Y H:i:s', strtotime($a_create)); ?>" readonly>
 
                     </div>
                     <div class="col-lg-4">
                         <label class="form-label">Atualização:</label>
-                        <input class="form-control" type="text" value="<?php echo $a_update; ?>" readonly>
+                        <input class="form-control" type="text" value="<?php echo date('d/m/Y H:i:s', strtotime($a_update)); ?>" readonly>
                     </div>
                 </div>
                 <div class="row">

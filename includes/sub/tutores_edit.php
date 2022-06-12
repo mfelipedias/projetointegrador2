@@ -55,11 +55,11 @@ while ($array = mysqli_fetch_array($busca)) {
                         </div>
                         <div class="col-xl-4">
                             <label class="form-label">Cadastro:</label>
-                            <input class="form-control" type="text" id="t_create" name="t_create" value="<?php echo $t_create ?>" readonly>
+                            <input class="form-control" type="text" id="t_create" name="t_create" value="<?php echo date('d/m/Y H:i:s', strtotime($t_create)); ?>" readonly>
                         </div>
                         <div class="col-xl-4">
                             <label class="form-label">Atualização:</label>
-                            <input class="form-control" type="text" id="t_update" name="t_update" value="<?php echo $t_update ?>" readonly>
+                            <input class="form-control" type="text" id="t_update" name="t_update" value="<?php echo date('d/m/Y H:i:s', strtotime($t_update)); ?>" readonly>
                         </div>
                         <div class="col-xl-7">
                             <label class="form-label">Nome:</label>

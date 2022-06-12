@@ -1,8 +1,9 @@
 <style>
-    .bg-coruja{
-    background-image: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url(./img/coruja.png);background-repeat: no-repeat;
-    color:black;
-}
+    .bg-coruja {
+        background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url(./img/coruja.png);
+        background-repeat: no-repeat;
+        color: black;
+    }
 </style>
 <div class="row mb-3">
     <div class="card shadow-sm divContr" style="background-image: url(./img/pen.png);background-size: 130px; background-repeat: no-repeat; background-position: 0% 50%; ">
@@ -29,64 +30,84 @@
             <h5><i class="bi bi-chat-left-dots" style="margin-right: 10px;"></i>Avisos</h5>
             <hr>
             <div class="list-group shadow-sm">
-                <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3 divContr" aria-current="true">
-                    <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
-                    <div  class="d-flex gap-2 w-100 justify-content-between">
-                        <div>
-                            <h6 class="mb-0">Título</h6>
-                            <p class="mb-0 opacity-75">Conteúdo da mensagem.</p>
+                <?php
+                include './scripts/conexao.php';
+                $sql = "SELECT * FROM `avisos` INNER JOIN `tutores` ON av_tutor=id_tutor ORDER BY av_create DESC";
+                $todos = mysqli_query($conexao, "$sql LIMIT 5");
+                while ($array = mysqli_fetch_array($todos)) {
+                    $id_aviso = $array['id_aviso'];
+                    $av_titulo = $array['av_titulo'];
+                    $av_conteudo = $array['av_conteudo'];
+                    $av_tutor = $array['av_tutor'];
+                    $av_create = $array['av_create'];
+                    $av_update = $array['av_update'];
+                    $t_nome = $array['t_nome'];
+                ?>
+                    <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3 divContr" aria-current="true">
+                        <i class="bi bi-cone-striped" style="font-size: 30px; color:#E74C3C"></i>
+                        <div class="d-flex gap-2 w-100 justify-content-between">
+                            <div>
+                                <h6 class="mb-0"><?php echo $av_titulo ?></h6>
+                                <p class="mb-0 opacity-90"><?php echo $av_conteudo ?></p>
+                                <p class="mb-0 opacity-75">Autor: <?php echo $t_nome ?></p>
+                            </div>
+                            <small class="opacity-75 text-nowrap"><?php echo date('d/m/Y H:i:s', strtotime($av_create)); ?></small>
                         </div>
-                        <small class="opacity-50 text-nowrap">01/01/2022</small>
-                    </div>
-                </a>
-                <a href="#"  class="list-group-item list-group-item-action d-flex gap-3 py-3 divContr" aria-current="true">
-                    <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
-                    <div class="d-flex gap-2 w-100 justify-content-between">
-                        <div>
-                            <h6 class="mb-0">Título</h6>
-                            <p class="mb-0 opacity-75">Conteúdo da mensagem.</p>
-                        </div>
-                        <small class="opacity-50 text-nowrap">01/01/2022</small>
-                    </div>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3 divContr" aria-current="true">
-                    <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
-                    <div class="d-flex gap-2 w-100 justify-content-between">
-                        <div>
-                            <h6 class="mb-0">Título</h6>
-                            <p class="mb-0 opacity-75">Conteúdo da mensagem.</p>
-                        </div>
-                        <small class="opacity-50 text-nowrap">01/01/2022</small>
-                    </div>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3 divContr" aria-current="true">
-                    <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
-                    <div class="d-flex gap-2 w-100 justify-content-between">
-                        <div>
-                            <h6 class="mb-0">Título</h6>
-                            <p class="mb-0 opacity-75">Conteúdo da mensagem.</p>
-                        </div>
-                        <small class="opacity-50 text-nowrap">01/01/2022</small>
-                    </div>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3 divContr" aria-current="true">
-                    <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
-                    <div class="d-flex gap-2 w-100 justify-content-between">
-                        <div>
-                            <h6 class="mb-0">Título</h6>
-                            <p class="mb-0 opacity-75">Conteúdo da mensagem.</p>
-                        </div>
-                        <small class="opacity-50 text-nowrap">01/01/2022</small>
-                    </div>
-                </a>
-            </div>
+                    </a>
+                <?php } ?>
 
+            </div>
+            <a href="#" type="button" class="mt-1 btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalAvisos">ver tudo...</a>
+            <!-- Modal -->
+            <div class="modal fade" id="modalAvisos" tabindex="-1" aria-labelledby="modalAvisos" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Todos os avisos</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="list-group">
+                                <?php
+                                include './scripts/conexao.php';
+                                $sql = "SELECT * FROM `avisos` INNER JOIN `tutores` ON av_tutor=id_tutor ORDER BY av_create DESC";
+                                $todos = mysqli_query($conexao, "$sql LIMIT 100");
+                                while ($array = mysqli_fetch_array($todos)) {
+                                    $id_aviso = $array['id_aviso'];
+                                    $av_titulo = $array['av_titulo'];
+                                    $av_conteudo = $array['av_conteudo'];
+                                    $av_tutor = $array['av_tutor'];
+                                    $av_create = $array['av_create'];
+                                    $av_update = $array['av_update'];
+                                    $t_nome = $array['t_nome'];
+                                ?>
+                                    <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3 divContr" aria-current="true">
+                                        <i class="bi bi-cone-striped" style="font-size: 30px; color:#E74C3C"></i>
+                                        <div class="d-flex gap-2 w-100 justify-content-between">
+                                            <div>
+                                                <h6 class="mb-0"><?php echo $av_titulo ?></h6>
+                                                <p class="mb-0 opacity-90"><?php echo $av_conteudo ?></p>
+                                                <p class="mb-0 opacity-75">Autor: <?php echo $t_nome ?></p>
+                                            </div>
+                                            <small class="opacity-75 text-nowrap"><?php echo date('d/m/Y H:i:s', strtotime($av_create)); ?></small>
+                                        </div>
+                                    </a>
+                                <?php } ?>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-xl-6">
         <h5><i class="bi bi-info-square" style="margin-right: 10px;"></i>Informaçoes gerais</h5>
         <hr>
-        <div class="card shadow-sm divContr" style="height: 381px;">
+        <div class="card shadow-sm divContr" style="height: 424px;">
             <div class="card-body">
                 <div class="row" style="margin-left: 0px;">
                     <p style="margin-left:8px;margin-bottom: 0; padding: 0;line-height: 1; color:#1673f7;font-family: 'Magistral Honesty', sans-serif;">Sistema</p>
