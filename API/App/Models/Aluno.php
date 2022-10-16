@@ -19,7 +19,6 @@ class Aluno
         if ($stmt->rowCount() > 0) {
             $result = $stmt->fetch(\PDO::FETCH_ASSOC);
             print_r($result);
-            return $result;
         } else {
             throw new \Exception("Nenhum aluno encontrato!");
         }
@@ -36,7 +35,6 @@ class Aluno
         if ($stmt->rowCount() > 0) {
             $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
             print_r($result);
-            return $result;
         } else {
             throw new \Exception("Nenhum aluno encontrado!");
         }
