@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use LDAP\Result;
+
 class Aluno
 {
     private static $table =  'alunos';
@@ -17,7 +19,7 @@ class Aluno
         if ($stmt->rowCount() > 0) {
             $result = $stmt->fetch(\PDO::FETCH_ASSOC);
             print_r($result);
-            return $stmt->fetch(\PDO::FETCH_ASSOC);
+            return $result;
         } else {
             throw new \Exception("Nenhum aluno encontrato!");
         }
@@ -32,9 +34,9 @@ class Aluno
         $stmt->execute();
 
         if ($stmt->rowCount() > 0) {
-            $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
             print_r($result);
-            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            return $result;
         } else {
             throw new \Exception("Nenhum aluno encontrado!");
         }
