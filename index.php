@@ -24,6 +24,7 @@
         .hover:hover {
             color: #E74C3C
         }
+
         .janela2 {
             font-size: 15px;
             background-color: black !important;
@@ -41,6 +42,7 @@
 </head>
 
 <body style="max-width: 1366px; margin-right:auto; margin-left:auto; color: black;">
+
     <?php
     session_start();
     if ((!isset($_SESSION['user']) == true) and (!isset($_SESSION['t_senha']) == true)) {
@@ -67,7 +69,7 @@
                     <p style="margin-top: 0; padding: 0;line-height: 1.1;font-size: 30px;background: linear-gradient(to right, #f32170, #ff6b08,#cf23cf, #eedd44); -webkit-text-fill-color: transparent;-webkit-background-clip: text;font-family: 'Magistral Honesty', sans-serif;">ACORDE</p>
                 </div>
             </a>
-            Modo Claro/Escuro
+            Auto Contraste
             <div class="buttonColor" style="background-color: #b0b0b0">
                 <div class="ball" style="background-color: #353535"></div>
             </div>
@@ -204,7 +206,7 @@
         ?>
     </main>
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <p class="col-md-4 mb-0 text-muted">&copy; 2021 Company, Inc</p>
+        <p class="col-md-4 mb-0 text-muted">&copy; 2022 Univesp</p>
 
         <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
             <img src="./img/logo_univesp.png" width="150px" role="img" class="img-fluid" alt="...">
@@ -219,19 +221,7 @@
         </ul>
     </footer>
 
-                <script>
-                    document.querySelector('.ball').addEventListener('click', (e) => {
-                        e.target.classList.toggle('ball-move');
-                        document.body.classList.toggle('Contraste');
-                        
-                        var els = document.getElementsByClassName("divContr");
-                        
-                        Array.prototype.forEach.call(els,
-                        function(el){
-                            el.classList.toggle('janela2');                      
-                        })
-                    });
-                </script>
+
 
     <!-- Optional JavaScript; choose one of the two! -->
 
@@ -248,6 +238,18 @@
         var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
             return new bootstrap.Popover(popoverTriggerEl)
         })
+    </script>
+    <script>
+        document.querySelector('.ball').addEventListener('click', (e) => {
+            e.target.classList.toggle('ball-move');
+            document.body.classList.toggle('Contraste');
+            var els = document.getElementsByClassName("divContr");
+
+            Array.prototype.forEach.call(els,
+                function(el) {
+                    el.classList.toggle('janela2');
+                })
+        });
     </script>
     <script src="js/scripts.js"></script>
 
